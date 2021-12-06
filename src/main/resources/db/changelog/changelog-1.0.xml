@@ -1,0 +1,131 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Siim">
+        <createTable tableName="author">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="text"/>
+        </createTable>
+
+        <createTable tableName="book">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="description" type="text"/>
+            <column name="name" type="text"/>
+            <column name="author_id" type="int">
+                <constraints foreignKeyName="fk_book_author" references="author(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="23/11/2021 - added client db" author="Kermo">
+        <createTable tableName="client">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="text"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="23/11/2021" author="Kermo">
+        <createTable tableName="bankaccount">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="accountnumber" type="text"/>
+            <column name="balance" type="int"/>
+            <column name="status" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id" type="int">
+                <constraints foreignKeyName="fk_bankaccount_client" references="client(id)"/>
+            </column>
+        </createTable>
+        <createTable tableName="employee_true">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="text"/>
+            <column name="age" type="int"/>
+            <column name="vaccinated" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="23/11/2021 added transaction history table" author="Kermo">
+        <createTable tableName="transhistory">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="fromAcc" type="text"/>
+            <column name="toAcc" type="text"/>
+            <column name="amount" type="int"/>
+            <column name="deposit" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="withdraw" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="23/11/2021 removed transfer and deposit" author="Kermo">
+        <dropColumn tableName="transhistory">
+            <column name="deposit"/>
+            <column name="withdraw"/>
+        </dropColumn>
+    </changeSet>
+    <changeSet id="23/11/2021 added first_name, last_name and address to client table" author="Kermo">
+        <dropColumn tableName="client">
+            <column name="name"/>
+        </dropColumn>
+        <addColumn tableName="client">
+            <column name="first_name" type="text"/>
+            <column name="last_name" type="text"/>
+            <column name="address" type="text"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="24/11/2021 did new table" author="Kermo">
+        <createTable tableName="history">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="from" type="text"/>
+            <column name="to" type="text"/>
+            <column name="amount" type="int"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="24/11/2021 lisa tulbad" author="Kermo">
+        <addColumn tableName="history">
+            <column name="deposit" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="withdraw" type="boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="29/11/2021 removed transfer and deposit" author="Kermo">
+        <dropColumn tableName="history">
+            <column name="deposit"/>
+            <column name="withdraw"/>
+        </dropColumn>
+    </changeSet>
+    <changeSet id="29/11/2021 added lastname" author="Kermo">
+        <dropColumn tableName="employee_true">
+            <column name="name"/>
+            <column name="age"/>
+            <column name="vaccinated"/>
+        </dropColumn>
+        <addColumn tableName="employee_true">
+            <column name="firstname" type="text"/>
+            <column name="lastname" type="text"/>
+            <column name="age" type="int"/>
+            <column name="vaccinated" type="boolean"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>
