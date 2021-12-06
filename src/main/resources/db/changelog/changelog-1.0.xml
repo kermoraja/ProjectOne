@@ -128,4 +128,36 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="29/11/2021 added lastname" author="Kermo">
+        <dropColumn tableName="employee_true">
+            <column name="name"/>
+            <column name="age"/>
+            <column name="vaccinated"/>
+        </dropColumn>
+        <addColumn tableName="employee_true">
+            <column name="firstname" type="text"/>
+            <column name="lastname" type="text"/>
+            <column name="age" type="int"/>
+            <column name="vaccinated" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="06.12.2021 - Tourism project, adding first databases" author="Kermo">
+        <createTable tableName="tour_main">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="text"/>
+            <column name="desc_short" type="text"/>
+            <column name="desc_long" type="text"/>
+            <column name="duration" type="text"/>
+            <column name="city" type="text"/>
+        </createTable>
+        <createTable tableName="tour_avb">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
 </databaseChangeLog>
