@@ -46,7 +46,7 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="tour_id" type="int">
-                <constraints foreignKeyName="avb_to_tour" references="tour_main(id)"></constraints>
+                <constraints foreignKeyName="avb_to_tour" references="tour_main(id)"/>
             </column>
             <column name="start_time" type="time"/>
             <column name="group_size" type="int"/>
