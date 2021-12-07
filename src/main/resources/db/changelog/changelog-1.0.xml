@@ -60,13 +60,13 @@
             <column name="tour_id" type="int">
                 <constraints foreignKeyName="fk_tour_main_id" references="tour_main(id)"/>
             </column>
-            <column name ="start_date" type="date"/>
-            <column name ="end_date" type="date"/>
-            <column name ="day_of_week" type="int"/>
-            <column name ="time" type="time"/>
-            <column name ="max_group" type="int"/>
-            <column name ="regular_price" type="int"/>
-            <column name ="reduced_price" type="int"/>
+            <column name="start_date" type="date"/>
+            <column name="end_date" type="date"/>
+            <column name="day_of_week" type="int"/>
+            <column name="time" type="time"/>
+            <column name="max_group" type="int"/>
+            <column name="regular_price" type="int"/>
+            <column name="reduced_price" type="int"/>
 
 
         </addColumn>
@@ -105,6 +105,36 @@
             <column name="email" type="text"/>
             <column name="city" type="text"/>
             <column name="car_size" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7.12.v3 lisatud booking tabel" author="Indrek Peenmaa">
+        <createTable tableName="booking">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tour_availability_id" type="int">
+                <constraints foreignKeyName="fk_booking_to_avb" references="tour_availabilities(id)"/>
+            </column>
+            <column name="tour_customer_id" type="int">
+                <constraints foreignKeyName="fk_booking_to_customer" references="tour_customer(id)"/>
+            </column>
+            <column name="tour_guide_id" type="int">
+                <constraints foreignKeyName="fk_booking_to_guide" references="tour_guide(id)"/>
+            </column>
+            <column name="tour_driver_id" type="int">
+                <constraints foreignKeyName="fk_booking_to_driver" references="tour_driver(id)"/>
+            </column>
+            <column name="start_location" type="text"/>
+            <column name="additional_info" type="text"/>
+            <column name="group_size_regular" type="int"/>
+            <column name="group_size_reduced" type="int"/>
+            <column name="group_size_total" type="int"/>
+            <column name="price_regular" type="int"/>
+            <column name="price_reduced" type="int"/>
+            <column name="total_price_regular" type="int"/>
+            <column name="total_price_reduced" type="int"/>
+            <column name="total_price" type="int"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
