@@ -107,8 +107,7 @@
             <column name="car_size" type="int"/>
         </createTable>
     </changeSet>
-
-    <changeSet id="7.12.v3 lisatud booking tabel" author="Indrek Peenmaa">
+    <changeSet id="7.12.v4 lisatud booking tabel" author="Indrek Peenmaa">
         <createTable tableName="booking">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
