@@ -146,6 +146,14 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="7.12.v5 Photo tabeli muutmine" author="Indrek Peenmaa">
+        <addColumn tableName="tour_photos">
+            <column name="tour_id" type="int">
+                <constraints foreignKeyName="fk_tour_to_photos" references="tour_main(id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
     <changeSet id="07.12.21 changed tour_main table first_name to title " author="Kermo">
         <renameColumn tableName="tour_main" newColumnName="title" oldColumnName="first_name" columnDataType="text"/>
 
