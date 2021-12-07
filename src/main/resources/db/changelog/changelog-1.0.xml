@@ -145,4 +145,9 @@
             <column name="photo_url" type="text"/>
         </createTable>
     </changeSet>
+
+    <changeSet id="07.12.21 changed tour_main table first_name to title " author="Kermo">
+        <renameColumn tableName="tour_main" newColumnName="title" oldColumnName="first_name" columnDataType="text"/>
+
+    </changeSet>
 </databaseChangeLog>
