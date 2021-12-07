@@ -138,11 +138,19 @@
     </changeSet>
     <changeSet id="07.12.21 added photos table" author="Kermo">
         <createTable tableName="tour_photos">
-        <column name="id" type="int" autoIncrement="true">
-        <constraints primaryKey="true"/>
-        </column>
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
             <column name="photo_title" type="text"/>
             <column name="photo_url" type="text"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="07.12.21 added city table" author="Silver">
+        <createTable tableName="tour_city">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="city" type="text"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
