@@ -23,5 +23,10 @@
         </createTable>
 
     </changeSet>
+    <changeSet id="06.12.21 renamed tour_avb table to tour_avb_template" author="Kermo">
+        <renameTable newTableName="tour_avb_template"
+                      oldTableName="tour_avb"/>
+    </changeSet>
+
 
 </databaseChangeLog>
