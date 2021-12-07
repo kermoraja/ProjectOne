@@ -166,4 +166,13 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="7.12.21 modified table tour_main column city to int" author="Kermo">
+        <dropColumn tableName="tour_main" columnName="city"/>
+        <addColumn tableName="tour_main">
+            <column name="city" type="int">
+                <constraints foreignKeyName="fk_tour_main_to_city" references="tour_city(id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
