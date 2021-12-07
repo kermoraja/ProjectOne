@@ -170,4 +170,29 @@
         <renameColumn tableName="tour_main" newColumnName="title" oldColumnName="first_name" columnDataType="text"/>
 
     </changeSet>
+    <changeSet id="07.12.21 added city table" author="Silver">
+        <createTable tableName="tour_city">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="city" type="text"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7.12.v5 Photo tabeli muutmine" author="Indrek Peenmaa">
+        <addColumn tableName="tour_photos">
+            <column name="tour_id" type="int">
+                <constraints foreignKeyName="fk_tour_to_photos" references="tour_main(id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="7.12.21 modified table tour_main column city to int" author="Kermo">
+        <dropColumn tableName="tour_main" columnName="city"/>
+        <addColumn tableName="tour_main">
+            <column name="city" type="int">
+                <constraints foreignKeyName="fk_tour_main_to_city" references="tour_city(id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
