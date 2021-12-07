@@ -25,7 +25,7 @@
     </changeSet>
     <changeSet id="06.12.21 renamed tour_avb table to tour_avb_template" author="Kermo">
         <renameTable newTableName="tour_avb_template"
-                      oldTableName="tour_avb"/>
+                     oldTableName="tour_avb"/>
     </changeSet>
 
     <changeSet id="07.12.2021 Tourism project, customer database" author="Silver">
@@ -39,6 +39,21 @@
             <column name="email" type="text"/>
 
         </createTable>
+    </changeSet>
+    <changeSet id="7.12.v1" author="Indrek Peenmaa">
+        <createTable tableName="tour_availabilities">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tour_id" type="int">
+                <constraints foreignKeyName="avb_to_tour" references="tour_main(id)"></constraints>
+            </column>
+            <column name="start_time" type="time"/>
+            <column name="group_size" type="int"/>
+            <column name="group_booked" type="int"/>
+            <column name="price_regular" type="int"/>
+        </createTable>
+
     </changeSet>
 
 
