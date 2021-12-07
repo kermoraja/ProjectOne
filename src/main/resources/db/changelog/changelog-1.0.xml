@@ -72,4 +72,10 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="7.12.v2" author="Indrek Peenmaa">
+        <addColumn tableName="tour_availabilities">
+            <column name="price_reduced" type="int"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
