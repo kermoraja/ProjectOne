@@ -28,5 +28,18 @@
                       oldTableName="tour_avb"/>
     </changeSet>
 
+    <changeSet id="07.12.2021 Tourism project, customer database" author="Silver">
+        <createTable tableName="tour_customer">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="text"/>
+            <column name="last_name" type="text"/>
+            <column name="phone" type="int"/>
+            <column name="email" type="text"/>
+
+        </createTable>
+    </changeSet>
+
 
 </databaseChangeLog>
