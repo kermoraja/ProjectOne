@@ -150,4 +150,12 @@
         <renameColumn tableName="tour_main" newColumnName="title" oldColumnName="first_name" columnDataType="text"/>
 
     </changeSet>
+    <changeSet id="07.12.21 added city table" author="Silver">
+        <createTable tableName="tour_city">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="city" type="text"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
