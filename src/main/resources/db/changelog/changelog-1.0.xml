@@ -55,6 +55,21 @@
         </createTable>
 
     </changeSet>
+    <changeSet id="07.12.21 added rows tour_avb_template" author="Kermo">
+        <addColumn tableName="tour_avb_template">
+            <column name="tour_id" type="int">
+                <constraints foreignKeyName="fk_tour_main_id" references="tour_main(id)"/>
+            </column>
+            <column name ="start_date" type="date"/>
+            <column name ="end_date" type="date"/>
+            <column name ="day_of_week" type="int"/>
+            <column name ="time" type="time"/>
+            <column name ="max_group" type="int"/>
+            <column name ="regular_price" type="int"/>
+            <column name ="reduced_price" type="int"/>
 
+
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>
