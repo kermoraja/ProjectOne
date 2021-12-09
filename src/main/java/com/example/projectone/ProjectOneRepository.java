@@ -69,14 +69,27 @@ public class ProjectOneRepository {
     }
 
     public void addGuide(TourGuide tourGuide){
-        String sql = "INSERT INTO tour_guide (name, phone, email, city, hour_rate) VALUES (:name, :phone, :email, :city, :hour_rate)";
+        String sql = "INSERT INTO tour_guide (name, phone, email, city_id, hour_rate) VALUES (:name, :phone, :email, :city, :hour_rate)";
         Map<String,Object>  paramMap = new HashMap<>();
         paramMap.put("name",tourGuide.getName());
         paramMap.put("phone",tourGuide.getPhone());
         paramMap.put("email", tourGuide.getEmail());
         paramMap.put("city",tourGuide.getCity());
-        paramMap.put("hour_rate",tourGuide.getHourRate());
+        paramMap.put("hour_rate",tourGuide.getHour_rate());
         jdbcTemplate.update(sql,new MapSqlParameterSource(paramMap));
+    }
+
+    public void addDriver(TourDriver tourDriver){
+        String sql= "INSERT INTO tour_driver (first_name, last_name, phone, email, city, car_size) VALUES" +
+                "(:first_name, :last_name, :phone, :email, :city, :car_size)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("first_name", tourDriver.getFirst_name());
+        paramMap.put("last_name", tourDriver.getLast_name());
+        paramMap.put("phone", tourDriver.getPhone());
+        paramMap.put("email", tourDriver.getEmail());
+        paramMap.put("city", tourDriver.getCity());
+        paramMap.put("car_size", tourDriver.getCar_size());
+        jdbcTemplate.update(sql, paramMap);
     }
 
 

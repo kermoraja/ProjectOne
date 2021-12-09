@@ -30,5 +30,9 @@ public class ProjectOneService {
 
     public void addGuide(TourGuide tourGuide) {projectOneRepository.addGuide(tourGuide);}
 
+    public void addDriver(TourDriver tourDriver){
+        projectOneRepository.addDriver(tourDriver);
+    }
+
     }
 
