@@ -1,9 +1,14 @@
 package com.example.projectone;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.web.bind.annotation.*;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 
 public class ProjectOneController {
@@ -11,11 +16,17 @@ public class ProjectOneController {
     private ProjectOneService projectOneService;
 
     @PostMapping("api/tour")
-    public void createTour( @RequestBody Tour tour){
-        projectOneService.createTour(tour);
+    public int createTour( @RequestBody Tour tour){
+        return projectOneService.createTour(tour);
     }
 
+    @PostMapping("api/addphoto")
+    public void addPhoto(@RequestBody TourPhotos tourPhotos){
+        projectOneService.addPhoto(tourPhotos);
+    }
+    @GetMapping("api/tour/{id}")
+    public TourDto getTour(@PathVariable("id") Integer id) {
+        return projectOneService.getTour(id);
 
-
-
+    }
 }
