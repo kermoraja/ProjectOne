@@ -38,7 +38,7 @@ public class ProjectOneRepository {
         paramMap.put("photo_title", tourPhotos.getPhoto_title());
         paramMap.put("photo_url", tourPhotos.getPhoto_url());
         paramMap.put("tour_id", tourPhotos.getTour_id());
-        jdbcTemplate.update(sql, new MapSqlParameterSource(paramMap));
+        jdbcTemplate.update(sql, paramMap);
     }
 
     public TourDto getTour(@PathVariable("id") Integer id) {
@@ -67,5 +67,17 @@ public class ProjectOneRepository {
         paramMap.put("city", tourCity.getCity());
         jdbcTemplate.update(sql, paramMap);
     }
+
+    public void addGuide(TourGuide tourGuide){
+        String sql = "INSERT INTO tour_guide (name, phone, email, city, hour_rate) VALUES (:name, :phone, :email, :city, :hour_rate)";
+        Map<String,Object>  paramMap = new HashMap<>();
+        paramMap.put("name",tourGuide.getName());
+        paramMap.put("phone",tourGuide.getPhone());
+        paramMap.put("email", tourGuide.getEmail());
+        paramMap.put("city",tourGuide.getCity());
+        paramMap.put("hour_rate",tourGuide.getHourRate());
+        jdbcTemplate.update(sql,new MapSqlParameterSource(paramMap));
+    }
+
 
 }

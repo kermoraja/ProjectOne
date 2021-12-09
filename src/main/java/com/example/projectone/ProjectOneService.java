@@ -27,4 +27,8 @@ public class ProjectOneService {
     }
 
     public void addCity(TourCity tourCity) {projectOneRepository.addCity(tourCity);}
-}
+
+    public void addGuide(TourGuide tourGuide) {projectOneRepository.addGuide(tourGuide);}
+
+    }
+

@@ -33,4 +33,9 @@ public class ProjectOneController {
     public void addCity(@RequestBody TourCity tourCity) {
         projectOneService.addCity(tourCity);
     }
+
+    @PostMapping("api/guide")
+    public void addGuide(@RequestBody TourGuide tourGuide) {
+        projectOneService.addGuide(tourGuide);
+    }
 }
