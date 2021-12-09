@@ -38,4 +38,9 @@ public class ProjectOneController {
     public void addGuide(@RequestBody TourGuide tourGuide) {
         projectOneService.addGuide(tourGuide);
     }
+
+    @PostMapping("api/driver")
+    public void addDriver(@RequestBody TourDriver tourDriver){
+        projectOneService.addDriver(tourDriver);
+    }
 }
