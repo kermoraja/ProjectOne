@@ -29,4 +29,8 @@ public class ProjectOneController {
         return projectOneService.getTour(id);
 
     }
+    @PostMapping("api/city")
+    public void addCity(@RequestBody TourCity tourCity) {
+        projectOneService.addCity(tourCity);
+    }
 }

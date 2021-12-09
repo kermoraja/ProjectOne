@@ -61,5 +61,11 @@ public class ProjectOneRepository {
             return result;
         }
     }
+    public void addCity(TourCity tourCity) {
+        String sql="INSERT INTO tour_city(city) VALUES (:city)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("city", tourCity.getCity());
+        jdbcTemplate.update(sql, paramMap);
+    }
 
 }

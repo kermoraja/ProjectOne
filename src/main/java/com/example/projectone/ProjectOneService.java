@@ -25,4 +25,6 @@ public class ProjectOneService {
     public TourDto getTour(Integer id) {
         return projectOneRepository.getTour(id);
     }
+
+    public void addCity(TourCity tourCity) {projectOneRepository.addCity(tourCity);}
 }
