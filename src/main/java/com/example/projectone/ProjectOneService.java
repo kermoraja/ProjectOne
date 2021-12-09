@@ -22,6 +22,7 @@ public class ProjectOneService {
         projectOneRepository.addPhoto(tourPhotos);
     }
 
+    public void addGuide(TourGuide tourGuide) {projectOneRepository.addGuide(tourGuide);}
     public TourDto getTour(Integer id) {
         return projectOneRepository.getTour(id);
     }

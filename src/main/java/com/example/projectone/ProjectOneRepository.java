@@ -41,6 +41,17 @@ public class ProjectOneRepository {
         jdbcTemplate.update(sql, new MapSqlParameterSource(paramMap));
     }
 
+    public void addGuide(TourGuide tourGuide){
+        String sql = "INSERT INTO tour_guide (name, phone, email, city, hour_rate) VALUES (:name, :phone, :email, :city, :hour_rate)";
+        Map<String,Object>  paramMap = new HashMap<>();
+        paramMap.put("name",tourGuide.getName());
+        paramMap.put("phone",tourGuide.getPhone());
+        paramMap.put("email", tourGuide.getEmail());
+        paramMap.put("city",tourGuide.getCity());
+        paramMap.put("hour_rate",tourGuide.getHourRate());
+        jdbcTemplate.update(sql,new MapSqlParameterSource(paramMap));
+    }
+
     public TourDto getTour(@PathVariable("id") Integer id) {
         String sql = "SELECT * FROM tour_main WHERE id = :id";
         Map<String, Object> paramMap = new HashMap<>();

@@ -29,4 +29,8 @@ public class ProjectOneController {
         return projectOneService.getTour(id);
 
     }
+    @PostMapping("api/guide")
+    public void addGuide(@RequestBody TourGuide tourGuide) {
+        projectOneService.addGuide(tourGuide);
+    }
 }
