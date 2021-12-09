@@ -12,17 +12,17 @@ public class ProjectOneService {
     @Autowired
     private ProjectOneRepository projectOneRepository;
 
-    @PostMapping("api/tour")
-    public int createTour(@RequestBody Tour tour) {
+
+    public int createTour(Tour tour) {
         return projectOneRepository.createTour(tour);
     }
 
-    @PostMapping("api/addphoto")
-    public void addPhoto(@RequestBody TourPhotos tourPhotos) {
-         projectOneRepository.addPhoto(tourPhotos);
+
+    public void addPhoto(TourPhotos tourPhotos) {
+        projectOneRepository.addPhoto(tourPhotos);
     }
-    @GetMapping("api/tour/{id}")
-    public TourDto getTour(@PathVariable("id") Integer id) {
+
+    public TourDto getTour(Integer id) {
         return projectOneRepository.getTour(id);
     }
 }

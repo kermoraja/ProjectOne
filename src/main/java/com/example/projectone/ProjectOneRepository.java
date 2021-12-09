@@ -37,6 +37,8 @@ public class ProjectOneRepository {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("photo_title", tourPhotos.getPhoto_title());
         paramMap.put("photo_url", tourPhotos.getPhoto_url());
+        paramMap.put("tour_id", tourPhotos.getTour_id());
+        jdbcTemplate.update(sql, new MapSqlParameterSource(paramMap));
     }
 
     public TourDto getTour(@PathVariable("id") Integer id) {
