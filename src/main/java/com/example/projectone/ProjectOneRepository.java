@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -90,6 +91,33 @@ public class ProjectOneRepository {
         paramMap.put("city", tourDriver.getCity());
         paramMap.put("car_size", tourDriver.getCar_size());
         jdbcTemplate.update(sql, paramMap);
+    }
+
+    public List<TourDto> getTourList(){
+        String sql="SELECT * FROM tour_main";
+        Map<String,Object> paramMap = new HashMap<>();
+        return jdbcTemplate.query(sql, paramMap, new TourDtoRowMapper());
+    }
+
+    public void deleteTour(Integer id) {
+        String sql="DELETE FROM tour_main WHERE id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        jdbcTemplate.update(sql, paramMap);
+    }
+
+    public void editTour(Tour tour){
+        String sql="UPDATE tour_main SET title = :newTitle, desc_short = :newDesc_short, desc_long = :newDesc_long, duration = :newDuration, city = :newCity WHERE id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", tour.getId());
+        paramMap.put("newTitle", tour.getTitle());
+        paramMap.put("newDesc_short", tour.getDesc_short());
+        paramMap.put("newDesc_long", tour.getDesc_long());
+        paramMap.put("newDuration", tour.getDuration());
+        paramMap.put("newCity", tour.getCity());
+        jdbcTemplate.update(sql, paramMap);
+
+
     }
 
 

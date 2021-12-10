@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -43,4 +44,20 @@ public class ProjectOneController {
     public void addDriver(@RequestBody TourDriver tourDriver){
         projectOneService.addDriver(tourDriver);
     }
+
+    @GetMapping("api/tourlist")
+    public List<TourDto> getTourList(){
+        return projectOneService.getTourList();
+    }
+
+    @DeleteMapping("api/deletetour/{id}")
+    public void deleteTour(@PathVariable("id") Integer id){
+        projectOneService.deleteTour(id);
+    }
+
+    @PutMapping("api/edittour")
+    public void editTour(@RequestBody Tour tour){
+        projectOneService.editTour(tour);
+    }
+
 }
