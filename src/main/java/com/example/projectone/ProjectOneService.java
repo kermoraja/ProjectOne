@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Service
 public class ProjectOneService {
     @Autowired
@@ -32,6 +34,18 @@ public class ProjectOneService {
 
     public void addDriver(TourDriver tourDriver){
         projectOneRepository.addDriver(tourDriver);
+    }
+
+    public List<TourDto> getTourList() {
+        return projectOneRepository.getTourList();
+    }
+
+    public void deleteTour(Integer id){
+        projectOneRepository.deleteTour(id);
+    }
+
+    public void editTour(Tour tour){
+        projectOneRepository.editTour(tour);
     }
 
     }

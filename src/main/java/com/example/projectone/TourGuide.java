@@ -7,7 +7,7 @@ public class TourGuide {
     private int phone;
     private String email;
     private int city;
-    private int hourRate;
+    private int hour_rate;
 
     public int getId() {
         return id;
@@ -49,11 +49,11 @@ public class TourGuide {
         this.city = city;
     }
 
-    public int getHourRate() {
-        return hourRate;
+    public int getHour_rate() {
+        return hour_rate;
     }
 
-    public void setHourRate(int hourRate) {
-        this.hourRate = hourRate;
+    public void setHour_rate(int hour_rate) {
+        this.hour_rate = hour_rate;
     }
 }
