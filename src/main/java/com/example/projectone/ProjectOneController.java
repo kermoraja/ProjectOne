@@ -60,4 +60,10 @@ public class ProjectOneController {
         projectOneService.editTour(tour);
     }
 
+    @DeleteMapping("api/deletephoto/{id}")
+    public void deletePhoto(@PathVariable("id") Integer id){
+        projectOneService.deletePhoto(id);
+    }
+
+
 }

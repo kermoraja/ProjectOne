@@ -28,11 +28,15 @@ public class ProjectOneService {
         return projectOneRepository.getTour(id);
     }
 
-    public void addCity(TourCity tourCity) {projectOneRepository.addCity(tourCity);}
+    public void addCity(TourCity tourCity) {
+        projectOneRepository.addCity(tourCity);
+    }
 
-    public void addGuide(TourGuide tourGuide) {projectOneRepository.addGuide(tourGuide);}
+    public void addGuide(TourGuide tourGuide) {
+        projectOneRepository.addGuide(tourGuide);
+    }
 
-    public void addDriver(TourDriver tourDriver){
+    public void addDriver(TourDriver tourDriver) {
         projectOneRepository.addDriver(tourDriver);
     }
 
@@ -40,13 +44,18 @@ public class ProjectOneService {
         return projectOneRepository.getTourList();
     }
 
-    public void deleteTour(Integer id){
+    public void deleteTour(Integer id) {
+        projectOneRepository.deletePhoto(id);
         projectOneRepository.deleteTour(id);
     }
 
-    public void editTour(Tour tour){
+    public void editTour(Tour tour) {
         projectOneRepository.editTour(tour);
     }
 
+    public void deletePhoto(@PathVariable("id") Integer id) {
+        projectOneRepository.deletePhoto(id);
+
     }
+}
 
