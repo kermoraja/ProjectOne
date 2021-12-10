@@ -19,8 +19,9 @@ import java.util.Map;
 public class ProjectOneRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
-    public int createTour(Tour tour){
-        String sql="INSERT INTO tour_main(title, desc_short, desc_long, duration, city) VALUES (:title, :desc_short, :desc_long, :duration, :city)";
+
+    public int createTour(Tour tour) {
+        String sql = "INSERT INTO tour_main(title, desc_short, desc_long, duration, city) VALUES (:title, :desc_short, :desc_long, :duration, :city)";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("title", tour.getTitle());
         paramMap.put("desc_short", tour.getDesc_short());
@@ -33,8 +34,8 @@ public class ProjectOneRepository {
 
     }
 
-    public void addPhoto(TourPhotos tourPhotos){
-        String sql="INSERT INTO tour_photos(photo_title, photo_url, tour_id) VALUES (:photo_title, :photo_url, :tour_id)";
+    public void addPhoto(TourPhotos tourPhotos) {
+        String sql = "INSERT INTO tour_photos(photo_title, photo_url, tour_id) VALUES (:photo_title, :photo_url, :tour_id)";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("photo_title", tourPhotos.getPhoto_title());
         paramMap.put("photo_url", tourPhotos.getPhoto_url());
@@ -62,26 +63,27 @@ public class ProjectOneRepository {
             return result;
         }
     }
+
     public void addCity(TourCity tourCity) {
-        String sql="INSERT INTO tour_city(city) VALUES (:city)";
+        String sql = "INSERT INTO tour_city(city) VALUES (:city)";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("city", tourCity.getCity());
         jdbcTemplate.update(sql, paramMap);
     }
 
-    public void addGuide(TourGuide tourGuide){
+    public void addGuide(TourGuide tourGuide) {
         String sql = "INSERT INTO tour_guide (name, phone, email, city_id, hour_rate) VALUES (:name, :phone, :email, :city, :hour_rate)";
-        Map<String,Object>  paramMap = new HashMap<>();
-        paramMap.put("name",tourGuide.getName());
-        paramMap.put("phone",tourGuide.getPhone());
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("name", tourGuide.getName());
+        paramMap.put("phone", tourGuide.getPhone());
         paramMap.put("email", tourGuide.getEmail());
-        paramMap.put("city",tourGuide.getCity());
-        paramMap.put("hour_rate",tourGuide.getHour_rate());
-        jdbcTemplate.update(sql,new MapSqlParameterSource(paramMap));
+        paramMap.put("city", tourGuide.getCity());
+        paramMap.put("hour_rate", tourGuide.getHour_rate());
+        jdbcTemplate.update(sql, new MapSqlParameterSource(paramMap));
     }
 
-    public void addDriver(TourDriver tourDriver){
-        String sql= "INSERT INTO tour_driver (first_name, last_name, phone, email, city, car_size) VALUES" +
+    public void addDriver(TourDriver tourDriver) {
+        String sql = "INSERT INTO tour_driver (first_name, last_name, phone, email, city, car_size) VALUES" +
                 "(:first_name, :last_name, :phone, :email, :city, :car_size)";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("first_name", tourDriver.getFirst_name());
@@ -93,21 +95,21 @@ public class ProjectOneRepository {
         jdbcTemplate.update(sql, paramMap);
     }
 
-    public List<TourDto> getTourList(){
-        String sql="SELECT * FROM tour_main";
-        Map<String,Object> paramMap = new HashMap<>();
+    public List<TourDto> getTourList() {
+        String sql = "SELECT * FROM tour_main";
+        Map<String, Object> paramMap = new HashMap<>();
         return jdbcTemplate.query(sql, paramMap, new TourDtoRowMapper());
     }
 
     public void deleteTour(Integer id) {
-        String sql="DELETE FROM tour_main WHERE id = :id";
+        String sql = "DELETE FROM tour_main WHERE id = :id";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
         jdbcTemplate.update(sql, paramMap);
     }
 
-    public void editTour(Tour tour){
-        String sql="UPDATE tour_main SET title = :newTitle, desc_short = :newDesc_short, desc_long = :newDesc_long, duration = :newDuration, city = :newCity WHERE id = :id";
+    public void editTour(Tour tour) {
+        String sql = "UPDATE tour_main SET title = :newTitle, desc_short = :newDesc_short, desc_long = :newDesc_long, duration = :newDuration, city = :newCity WHERE id = :id";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", tour.getId());
         paramMap.put("newTitle", tour.getTitle());
@@ -120,5 +122,12 @@ public class ProjectOneRepository {
 
     }
 
+    public void deletePhoto(Integer id) {
+        String sql = "DELETE FROM tour_photos WHERE tour_id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        jdbcTemplate.update(sql, paramMap);
 
+
+    }
 }
