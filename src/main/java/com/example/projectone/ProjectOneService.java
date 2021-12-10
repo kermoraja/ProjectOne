@@ -53,9 +53,17 @@ public class ProjectOneService {
         projectOneRepository.editTour(tour);
     }
 
-    public void deletePhoto(@PathVariable("id") Integer id) {
+    public void deletePhoto(Integer id) {
         projectOneRepository.deletePhoto(id);
 
+    }
+
+    public TourPhotosDto getPhotos(Integer id){
+        return projectOneRepository.getPhotos(id);
+    }
+
+    public List<TourWithPhotos> tourWithPhotos() {
+        return projectOneRepository.tourWithPhotos();
     }
 }
 

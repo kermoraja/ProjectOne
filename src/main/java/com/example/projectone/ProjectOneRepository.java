@@ -43,7 +43,7 @@ public class ProjectOneRepository {
         jdbcTemplate.update(sql, paramMap);
     }
 
-    public TourDto getTour(@PathVariable("id") Integer id) {
+    public TourDto getTour(Integer id) {
         String sql = "SELECT * FROM tour_main WHERE id = :id";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
@@ -129,5 +129,47 @@ public class ProjectOneRepository {
         jdbcTemplate.update(sql, paramMap);
 
 
+    }
+
+    public TourPhotosDto getPhotos(Integer id) {
+        String sql = "SELECT * FROM tour_photos WHERE tour_id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        return jdbcTemplate.queryForObject(sql, paramMap, new TourPhotosDtoRowMapper());
+    }
+
+    private class TourPhotosDtoRowMapper implements RowMapper<TourPhotosDto> {
+        @Override
+        public TourPhotosDto mapRow(ResultSet resultSet, int i) throws SQLException {
+            TourPhotosDto result = new TourPhotosDto();
+            result.setId(resultSet.getInt("id"));
+            result.setPhoto_title(resultSet.getString("photo_title"));
+            result.setPhoto_url(resultSet.getString("photo_url"));
+            result.setTour_id(resultSet.getInt("tour_id"));
+            return result;
+        }
+    }
+
+    public List<TourWithPhotos> tourWithPhotos() {
+        String sql = "SELECT * FROM tour_main b JOIN tour_photos c ON b.id = c.tour_id";
+        Map<String, Object> paramMap = new HashMap<>();
+        return jdbcTemplate.query(sql, paramMap, new TourWithPhotosRowMapper());
+    }
+
+    private class TourWithPhotosRowMapper implements RowMapper<TourWithPhotos> {
+        @Override
+        public TourWithPhotos mapRow(ResultSet resultSet, int i) throws SQLException {
+            TourWithPhotos result = new TourWithPhotos();
+            result.setId(resultSet.getInt("id"));
+            result.setDesc_short(resultSet.getString("desc_short"));
+            result.setDesc_long(resultSet.getString("desc_long"));
+            result.setDuration(resultSet.getString("duration"));
+            result.setCity(resultSet.getInt("city"));
+            result.setTitle(resultSet.getString("title"));
+            result.setPhoto_title(resultSet.getString("photo_title"));
+            result.setPhoto_url(resultSet.getString("photo_url"));
+
+            return result;
+        }
     }
 }

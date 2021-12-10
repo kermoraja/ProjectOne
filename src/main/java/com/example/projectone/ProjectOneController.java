@@ -17,19 +17,21 @@ public class ProjectOneController {
     private ProjectOneService projectOneService;
 
     @PostMapping("api/tour")
-    public int createTour( @RequestBody Tour tour){
+    public int createTour(@RequestBody Tour tour) {
         return projectOneService.createTour(tour);
     }
 
     @PostMapping("api/addphoto")
-    public void addPhoto(@RequestBody TourPhotos tourPhotos){
+    public void addPhoto(@RequestBody TourPhotos tourPhotos) {
         projectOneService.addPhoto(tourPhotos);
     }
+
     @GetMapping("api/tour/{id}")
     public TourDto getTour(@PathVariable("id") Integer id) {
         return projectOneService.getTour(id);
 
     }
+
     @PostMapping("api/city")
     public void addCity(@RequestBody TourCity tourCity) {
         projectOneService.addCity(tourCity);
@@ -41,29 +43,37 @@ public class ProjectOneController {
     }
 
     @PostMapping("api/driver")
-    public void addDriver(@RequestBody TourDriver tourDriver){
+    public void addDriver(@RequestBody TourDriver tourDriver) {
         projectOneService.addDriver(tourDriver);
     }
 
     @GetMapping("api/tourlist")
-    public List<TourDto> getTourList(){
+    public List<TourDto> getTourList() {
         return projectOneService.getTourList();
     }
 
     @DeleteMapping("api/deletetour/{id}")
-    public void deleteTour(@PathVariable("id") Integer id){
+    public void deleteTour(@PathVariable("id") Integer id) {
         projectOneService.deleteTour(id);
     }
 
     @PutMapping("api/edittour")
-    public void editTour(@RequestBody Tour tour){
+    public void editTour(@RequestBody Tour tour) {
         projectOneService.editTour(tour);
     }
 
     @DeleteMapping("api/deletephoto/{id}")
-    public void deletePhoto(@PathVariable("id") Integer id){
+    public void deletePhoto(@PathVariable("id") Integer id) {
         projectOneService.deletePhoto(id);
     }
 
+    @GetMapping("api/photo/{id}")
+    public TourPhotosDto getPhotos(@PathVariable("id") Integer id) {
+        return projectOneService.getPhotos(id);
+    }
 
+    @GetMapping("api/tourwithphotos")
+    public List<TourWithPhotos> tourWithPhotos() {
+        return projectOneService.tourWithPhotos();
+    }
 }
