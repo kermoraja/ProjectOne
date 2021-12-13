@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -171,5 +172,22 @@ public class ProjectOneRepository {
 
             return result;
         }
+    }
+
+    public void createUser(String userName, String password) {
+
+        String sql="INSERT INTO user_db(user_name, password) VALUES (:user_name, :password)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("user_name", userName);
+        paramMap.put("password", password);
+        jdbcTemplate.update(sql, paramMap);
+    }
+
+    public String getPassword(String userName){
+        String sql="SELECT password FROM user_db WHERE user_name = :user_name";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("user_name", userName);
+        return jdbcTemplate.queryForObject(sql, paramMap, String.class);
+
     }
 }

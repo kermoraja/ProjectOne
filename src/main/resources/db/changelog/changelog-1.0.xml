@@ -205,5 +205,18 @@
             <column name="city" type="text"/>
         </dropColumn>
     </changeSet>
+    <changeSet id="13.12.21 user db" author="Kermo">
+        <createTable tableName="user_db">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_name" type="text">
+            <constraints nullable="false"/>
+            </column>
+       <column name="password" type="text">
+            <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>

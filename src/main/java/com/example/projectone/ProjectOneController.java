@@ -76,4 +76,15 @@ public class ProjectOneController {
     public List<TourWithPhotos> tourWithPhotos() {
         return projectOneService.tourWithPhotos();
     }
+
+    @PostMapping("api/registeruser")
+    public void createUser(@RequestBody User user){
+        projectOneService.createUser(user);
+    }
+
+    @PostMapping("/api/login")
+    public String login(@RequestBody Login login){
+        return projectOneService.login(login.getUserName(), login.getPassword());
+    }
+
 }

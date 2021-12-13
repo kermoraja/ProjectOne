@@ -1,11 +1,8 @@
 package com.example.projectone;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -13,6 +10,9 @@ import java.util.List;
 public class ProjectOneService {
     @Autowired
     private ProjectOneRepository projectOneRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     public int createTour(Tour tour) {
@@ -65,5 +65,21 @@ public class ProjectOneService {
     public List<TourWithPhotos> tourWithPhotos() {
         return projectOneRepository.tourWithPhotos();
     }
+
+    public void createUser(User user){
+        String encodePassword = passwordEncoder.encode(user.getPassword());
+        projectOneRepository.createUser(user.getUser_name(), encodePassword);
+    }
+
+    public String login(String userName, String password){
+        String encodedPassword = projectOneRepository.getPassword(userName);
+        if(passwordEncoder.matches(password, encodedPassword)){
+            return "Sisse logitud";
+        }else{
+            return "Parool vale";
+        }
+
+    }
+
 }
 
