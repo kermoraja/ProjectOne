@@ -1,6 +1,13 @@
 package com.example.projectone;
 
+import com.example.projectone.excpetion.ApplicationException;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import liquibase.pro.packaged.A;
+import liquibase.pro.packaged.J;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContextException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +20,8 @@ public class ProjectOneService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+
 
 
     public int createTour(Tour tour) {
@@ -74,9 +83,13 @@ public class ProjectOneService {
     public String login(String userName, String password){
         String encodedPassword = projectOneRepository.getPassword(userName);
         if(passwordEncoder.matches(password, encodedPassword)){
-            return "Sisse logitud";
+
+            JwtBuilder builder = Jwts.builder()
+                    .signWith(SignatureAlgorithm.HS256, "secret")
+                    .claim("username", userName);
+                    return builder.compact();
         }else{
-            return "Parool vale";
+            throw new ApplicationException("Wrong password");
         }
 
     }
