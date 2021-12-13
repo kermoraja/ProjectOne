@@ -32,7 +32,7 @@ public class ProjectOneController {
 
     }
 
-    @PostMapping("api/city")
+    @PostMapping("api/public/city")
     public void addCity(@RequestBody TourCity tourCity) {
         projectOneService.addCity(tourCity);
     }
@@ -82,7 +82,7 @@ public class ProjectOneController {
         projectOneService.createUser(user);
     }
 
-    @PostMapping("/api/login")
+    @PostMapping("/api/public/login")
     public String login(@RequestBody Login login){
         return projectOneService.login(login.getUserName(), login.getPassword());
     }
