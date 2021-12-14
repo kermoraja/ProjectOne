@@ -26,13 +26,13 @@ public class ProjectOneController {
         projectOneService.addPhoto(tourPhotos);
     }
 
-    @GetMapping("api/tour/{id}")
+    @GetMapping("api/public/tour/{id}")
     public TourDto getTour(@PathVariable("id") Integer id) {
         return projectOneService.getTour(id);
 
     }
 
-    @PostMapping("api/public/city")
+    @PostMapping("api/city")
     public void addCity(@RequestBody TourCity tourCity) {
         projectOneService.addCity(tourCity);
     }
@@ -47,7 +47,7 @@ public class ProjectOneController {
         projectOneService.addDriver(tourDriver);
     }
 
-    @GetMapping("api/tourlist")
+    @GetMapping("api/public/tourlist")
     public List<TourDto> getTourList() {
         return projectOneService.getTourList();
     }
@@ -67,17 +67,17 @@ public class ProjectOneController {
         projectOneService.deletePhoto(id);
     }
 
-    @GetMapping("api/photo/{id}")
+    @GetMapping("api/public/photo/{id}")
     public TourPhotosDto getPhotos(@PathVariable("id") Integer id) {
         return projectOneService.getPhotos(id);
     }
 
-    @GetMapping("api/tourwithphotos")
+    @GetMapping("api/public/tourwithphotos")
     public List<TourWithPhotos> tourWithPhotos() {
         return projectOneService.tourWithPhotos();
     }
 
-    @PostMapping("api/registeruser")
+    @PostMapping("api/public/registeruser")
     public void createUser(@RequestBody User user){
         projectOneService.createUser(user);
     }
