@@ -24,8 +24,8 @@ public class ProjectOneService {
 
 
 
-    public int createTour(Tour tour) {
-        return projectOneRepository.createTour(tour);
+    public int createTour(TourDto tourDto) {
+        return projectOneRepository.createTour(tourDto);
     }
 
 
@@ -33,7 +33,7 @@ public class ProjectOneService {
         projectOneRepository.addPhoto(tourPhotos);
     }
 
-    public TourDto getTour(Integer id) {
+    public TourDto getTour(java.lang.Integer id) {
         return projectOneRepository.getTour(id);
     }
 
@@ -65,19 +65,19 @@ public class ProjectOneService {
         projectOneRepository.deleteGuide(id);
     }
 
-    public void editTour(Tour tour) {
-        projectOneRepository.editTour(tour);
+    public void editTour(TourDto tourDto) {
+        projectOneRepository.editTour(tourDto);
     }
     public void editGuide(GuideDto guideDto) {
         projectOneRepository.editGuide(guideDto);
     }
 
-    public void deletePhoto(Integer id) {
+    public void deletePhoto(java.lang.Integer id) {
         projectOneRepository.deletePhoto(id);
 
     }
 
-    public TourPhotosDto getPhotos(Integer id){
+    public TourPhotosDto getPhotos(java.lang.Integer id){
         return projectOneRepository.getPhotos(id);
     }
 
@@ -103,11 +103,22 @@ public class ProjectOneService {
         }
 
     }
-    public List<PhotoGalleryDto> getGallery(Integer id){
+
+    public List<PhotoGalleryDto> getFullGallery() {
+        return projectOneRepository.getFullGallery();
+    }
+
+    public List<PhotoGalleryDto> getGallery(java.lang.Integer id){
         return projectOneRepository.getGallery(id);
     }
     public void addGallery(PhotoGalleryDto photoGalleryDto) {
         projectOneRepository.addGallery(photoGalleryDto);
+    }
+    public void editGallery(PhotoGalleryDto photoGalleryDto){
+        projectOneRepository.editGallery(photoGalleryDto);
+    }
+    public void deleteGallery(Integer id) {
+        projectOneRepository.deleteGallery(id);
     }
 
 }
