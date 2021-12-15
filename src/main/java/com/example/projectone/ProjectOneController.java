@@ -1,14 +1,9 @@
 package com.example.projectone;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 
@@ -17,8 +12,8 @@ public class ProjectOneController {
     private ProjectOneService projectOneService;
 
     @PostMapping("api/tour")
-    public int createTour(@RequestBody Tour tour) {
-        return projectOneService.createTour(tour);
+    public int createTour(@RequestBody TourDto tourDto) {
+        return projectOneService.createTour(tourDto);
     }
 
     @PostMapping("api/addphoto")
@@ -27,7 +22,7 @@ public class ProjectOneController {
     }
 
     @GetMapping("api/public/tour/{id}")
-    public TourDto getTour(@PathVariable("id") Integer id) {
+    public TourDto getTour(@PathVariable("id") java.lang.Integer id) {
         return projectOneService.getTour(id);
 
     }
@@ -53,22 +48,22 @@ public class ProjectOneController {
     }
 
     @DeleteMapping("api/deletetour/{id}")
-    public void deleteTour(@PathVariable("id") Integer id) {
+    public void deleteTour(@PathVariable("id") java.lang.Integer id) {
         projectOneService.deleteTour(id);
     }
 
     @PutMapping("api/edittour")
-    public void editTour(@RequestBody Tour tour) {
-        projectOneService.editTour(tour);
+    public void editTour(@RequestBody TourDto tourDto) {
+        projectOneService.editTour(tourDto);
     }
 
     @DeleteMapping("api/deletephoto/{id}")
-    public void deletePhoto(@PathVariable("id") Integer id) {
+    public void deletePhoto(@PathVariable("id") java.lang.Integer id) {
         projectOneService.deletePhoto(id);
     }
 
     @GetMapping("api/public/photo/{id}")
-    public TourPhotosDto getPhotos(@PathVariable("id") Integer id) {
+    public TourPhotosDto getPhotos(@PathVariable("id") java.lang.Integer id) {
         return projectOneService.getPhotos(id);
     }
 
@@ -78,22 +73,36 @@ public class ProjectOneController {
     }
 
     @PostMapping("api/public/registeruser")
-    public void createUser(@RequestBody User user){
+    public void createUser(@RequestBody User user) {
         projectOneService.createUser(user);
     }
 
     @PostMapping("/api/public/login")
-    public String login(@RequestBody Login login){
+    public String login(@RequestBody Login login) {
         return projectOneService.login(login.getUserName(), login.getPassword());
     }
+
     @GetMapping("api/public/gallery/{id}")
-    public List<PhotoGalleryDto> getGallery(@PathVariable("id") Integer id) {
+    public List<PhotoGalleryDto> getGallery(@PathVariable("id") java.lang.Integer id) {
         return projectOneService.getGallery(id);
+    }
+
+    @GetMapping("api/public/gallery")
+    public List<PhotoGalleryDto> getFullGallery() {
+        return projectOneService.getFullGallery();
+    }
+    @PutMapping("api/public/editGallery")
+    public void editGallery(PhotoGalleryDto photoGalleryDto){
+       projectOneService.editGallery(photoGalleryDto);
     }
 
     @PostMapping("api/addgallery")
     public void addGallery(@RequestBody PhotoGalleryDto photoGalleryDto) {
         projectOneService.addGallery(photoGalleryDto);
+    }
+    @DeleteMapping("api/public/deletegallery/{id}")
+    public void deleteGallery(@PathVariable ("id") Integer id){
+        projectOneService.deleteGallery(id);
     }
 
 }

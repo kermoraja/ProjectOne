@@ -4,10 +4,7 @@ import com.example.projectone.excpetion.ApplicationException;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import liquibase.pro.packaged.A;
-import liquibase.pro.packaged.J;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContextException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +21,8 @@ public class ProjectOneService {
 
 
 
-    public int createTour(Tour tour) {
-        return projectOneRepository.createTour(tour);
+    public int createTour(TourDto tourDto) {
+        return projectOneRepository.createTour(tourDto);
     }
 
 
@@ -33,7 +30,7 @@ public class ProjectOneService {
         projectOneRepository.addPhoto(tourPhotos);
     }
 
-    public TourDto getTour(Integer id) {
+    public TourDto getTour(java.lang.Integer id) {
         return projectOneRepository.getTour(id);
     }
 
@@ -53,21 +50,21 @@ public class ProjectOneService {
         return projectOneRepository.getTourList();
     }
 
-    public void deleteTour(Integer id) {
+    public void deleteTour(java.lang.Integer id) {
         projectOneRepository.deletePhoto(id);
         projectOneRepository.deleteTour(id);
     }
 
-    public void editTour(Tour tour) {
-        projectOneRepository.editTour(tour);
+    public void editTour(TourDto tourDto) {
+        projectOneRepository.editTour(tourDto);
     }
 
-    public void deletePhoto(Integer id) {
+    public void deletePhoto(java.lang.Integer id) {
         projectOneRepository.deletePhoto(id);
 
     }
 
-    public TourPhotosDto getPhotos(Integer id){
+    public TourPhotosDto getPhotos(java.lang.Integer id){
         return projectOneRepository.getPhotos(id);
     }
 
@@ -93,11 +90,22 @@ public class ProjectOneService {
         }
 
     }
-    public List<PhotoGalleryDto> getGallery(Integer id){
+
+    public List<PhotoGalleryDto> getFullGallery() {
+        return projectOneRepository.getFullGallery();
+    }
+
+    public List<PhotoGalleryDto> getGallery(java.lang.Integer id){
         return projectOneRepository.getGallery(id);
     }
     public void addGallery(PhotoGalleryDto photoGalleryDto) {
         projectOneRepository.addGallery(photoGalleryDto);
+    }
+    public void editGallery(PhotoGalleryDto photoGalleryDto){
+        projectOneRepository.editGallery(photoGalleryDto);
+    }
+    public void deleteGallery(Integer id) {
+        projectOneRepository.deleteGallery(id);
     }
 
 }

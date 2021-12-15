@@ -7,8 +7,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,17 +19,17 @@ public class ProjectOneRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public int createTour(Tour tour) {
+    public int createTour(TourDto tourDto) {
         String sql = "INSERT INTO tour_main(title, desc_short, desc_long, duration, city) VALUES (:title, :desc_short, :desc_long, :duration, :city)";
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("title", tour.getTitle());
-        paramMap.put("desc_short", tour.getDesc_short());
-        paramMap.put("desc_long", tour.getDesc_long());
-        paramMap.put("duration", tour.getDuration());
-        paramMap.put("city", tour.getCity());
+        paramMap.put("title", tourDto.getTitle());
+        paramMap.put("desc_short", tourDto.getDesc_short());
+        paramMap.put("desc_long", tourDto.getDesc_long());
+        paramMap.put("duration", tourDto.getDuration());
+        paramMap.put("city", tourDto.getCity());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(sql, new MapSqlParameterSource(paramMap), keyHolder);
-        return (Integer) keyHolder.getKeys().get("id");
+        return (java.lang.Integer) keyHolder.getKeys().get("id");
 
     }
 
@@ -44,7 +42,7 @@ public class ProjectOneRepository {
         jdbcTemplate.update(sql, paramMap);
     }
 
-    public TourDto getTour(Integer id) {
+    public TourDto getTour(java.lang.Integer id) {
         String sql = "SELECT * FROM tour_main WHERE id = :id";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
@@ -102,28 +100,28 @@ public class ProjectOneRepository {
         return jdbcTemplate.query(sql, paramMap, new TourDtoRowMapper());
     }
 
-    public void deleteTour(Integer id) {
+    public void deleteTour(java.lang.Integer id) {
         String sql = "DELETE FROM tour_main WHERE id = :id";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
         jdbcTemplate.update(sql, paramMap);
     }
 
-    public void editTour(Tour tour) {
+    public void editTour(TourDto tourDto) {
         String sql = "UPDATE tour_main SET title = :newTitle, desc_short = :newDesc_short, desc_long = :newDesc_long, duration = :newDuration, city = :newCity WHERE id = :id";
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("id", tour.getId());
-        paramMap.put("newTitle", tour.getTitle());
-        paramMap.put("newDesc_short", tour.getDesc_short());
-        paramMap.put("newDesc_long", tour.getDesc_long());
-        paramMap.put("newDuration", tour.getDuration());
-        paramMap.put("newCity", tour.getCity());
+        paramMap.put("id", tourDto.getId());
+        paramMap.put("newTitle", tourDto.getTitle());
+        paramMap.put("newDesc_short", tourDto.getDesc_short());
+        paramMap.put("newDesc_long", tourDto.getDesc_long());
+        paramMap.put("newDuration", tourDto.getDuration());
+        paramMap.put("newCity", tourDto.getCity());
         jdbcTemplate.update(sql, paramMap);
 
 
     }
 
-    public void deletePhoto(Integer id) {
+    public void deletePhoto(java.lang.Integer id) {
         String sql = "DELETE FROM tour_photos WHERE tour_id = :id";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
@@ -132,7 +130,7 @@ public class ProjectOneRepository {
 
     }
 
-    public TourPhotosDto getPhotos(Integer id) {
+    public TourPhotosDto getPhotos(java.lang.Integer id) {
         String sql = "SELECT * FROM tour_photos WHERE tour_id = :id";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
@@ -190,12 +188,18 @@ public class ProjectOneRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, String.class);
 
     }
-    public List<PhotoGalleryDto> getGallery(Integer id) {
+    public List<PhotoGalleryDto> getGallery(java.lang.Integer id) {
         String sql = "SELECT * FROM tour_gallery WHERE tour_id = :id";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
         return jdbcTemplate.query(sql, paramMap, new PhotoGalleryDtoRowMapper());
     }
+    public List<PhotoGalleryDto> getFullGallery() {
+        String sql = "SELECT * FROM tour_gallery";
+        Map<String, Object> paramMap = new HashMap<>();
+        return jdbcTemplate.query(sql, paramMap, new PhotoGalleryDtoRowMapper());
+    }
+
     private class PhotoGalleryDtoRowMapper implements RowMapper<PhotoGalleryDto> {
         @Override
         public PhotoGalleryDto mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -213,4 +217,19 @@ public class ProjectOneRepository {
         paramMap.put("tour_id", photoGalleryDto.getTour_id());
         jdbcTemplate.update(sql, paramMap);
     }
+    public void editGallery(PhotoGalleryDto photoGalleryDto){
+        String sql= "UPDATE tour_gallery SET photo_url =:photo_url, tour_id = :tour_id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("photo_url", photoGalleryDto.getPhoto_url());
+        paramMap.put("tour_id", photoGalleryDto.getTour_id());
+        jdbcTemplate.update(sql, paramMap);
+
+    }
+    public void deleteGallery(Integer id){
+        String sql= "DELETE FROM tour_gallery WHERE id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        jdbcTemplate.update(sql, paramMap);
+    }
+
 }
