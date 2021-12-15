@@ -53,13 +53,23 @@ public class ProjectOneService {
         return projectOneRepository.getTourList();
     }
 
+    public List<GuideDto> getGuideList() {
+        return projectOneRepository.getGuideList();
+    }
+
     public void deleteTour(Integer id) {
         projectOneRepository.deletePhoto(id);
         projectOneRepository.deleteTour(id);
     }
+    public void deleteGuide(Integer id) {
+        projectOneRepository.deleteGuide(id);
+    }
 
     public void editTour(Tour tour) {
         projectOneRepository.editTour(tour);
+    }
+    public void editGuide(GuideDto guideDto) {
+        projectOneRepository.editGuide(guideDto);
     }
 
     public void deletePhoto(Integer id) {
