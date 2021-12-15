@@ -30,7 +30,7 @@ public class ProjectOneRepository {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(sql, new MapSqlParameterSource(paramMap), keyHolder);
         return (java.lang.Integer) keyHolder.getKeys().get("id");
-
+// test
     }
 
     public void addPhoto(TourPhotos tourPhotos) {
