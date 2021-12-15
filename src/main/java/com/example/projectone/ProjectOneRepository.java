@@ -190,4 +190,27 @@ public class ProjectOneRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, String.class);
 
     }
+    public List<PhotoGalleryDto> getGallery(Integer id) {
+        String sql = "SELECT * FROM tour_gallery WHERE tour_id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        return jdbcTemplate.query(sql, paramMap, new PhotoGalleryDtoRowMapper());
+    }
+    private class PhotoGalleryDtoRowMapper implements RowMapper<PhotoGalleryDto> {
+        @Override
+        public PhotoGalleryDto mapRow(ResultSet resultSet, int i) throws SQLException {
+            PhotoGalleryDto result = new PhotoGalleryDto();
+            result.setId(resultSet.getInt("id"));
+            result.setPhoto_url(resultSet.getString("photo_url"));
+            result.setTour_id(resultSet.getInt("tour_id"));
+            return result;
+        }
+    }
+    public void addGallery(PhotoGalleryDto photoGalleryDto) {
+        String sql = "INSERT INTO tour_gallery(photo_url, tour_id) VALUES (:photo_url, :tour_id)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("photo_url", photoGalleryDto.getPhoto_url());
+        paramMap.put("tour_id", photoGalleryDto.getTour_id());
+        jdbcTemplate.update(sql, paramMap);
+    }
 }

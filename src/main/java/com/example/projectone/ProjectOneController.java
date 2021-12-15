@@ -86,5 +86,14 @@ public class ProjectOneController {
     public String login(@RequestBody Login login){
         return projectOneService.login(login.getUserName(), login.getPassword());
     }
+    @GetMapping("api/public/gallery/{id}")
+    public List<PhotoGalleryDto> getGallery(@PathVariable("id") Integer id) {
+        return projectOneService.getGallery(id);
+    }
+
+    @PostMapping("api/addgallery")
+    public void addGallery(@RequestBody PhotoGalleryDto photoGalleryDto) {
+        projectOneService.addGallery(photoGalleryDto);
+    }
 
 }
