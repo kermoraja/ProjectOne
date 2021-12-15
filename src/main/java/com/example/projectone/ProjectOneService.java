@@ -4,7 +4,10 @@ import com.example.projectone.excpetion.ApplicationException;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import liquibase.pro.packaged.A;
+import liquibase.pro.packaged.J;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContextException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,13 +53,23 @@ public class ProjectOneService {
         return projectOneRepository.getTourList();
     }
 
-    public void deleteTour(java.lang.Integer id) {
+    public List<GuideDto> getGuideList() {
+        return projectOneRepository.getGuideList();
+    }
+
+    public void deleteTour(Integer id) {
         projectOneRepository.deletePhoto(id);
         projectOneRepository.deleteTour(id);
+    }
+    public void deleteGuide(Integer id) {
+        projectOneRepository.deleteGuide(id);
     }
 
     public void editTour(TourDto tourDto) {
         projectOneRepository.editTour(tourDto);
+    }
+    public void editGuide(GuideDto guideDto) {
+        projectOneRepository.editGuide(guideDto);
     }
 
     public void deletePhoto(java.lang.Integer id) {

@@ -1,9 +1,14 @@
 package com.example.projectone;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 
@@ -32,12 +37,12 @@ public class ProjectOneController {
         projectOneService.addCity(tourCity);
     }
 
-    @PostMapping("api/guide")
+    @PostMapping("api/public/guide")
     public void addGuide(@RequestBody TourGuide tourGuide) {
         projectOneService.addGuide(tourGuide);
     }
 
-    @PostMapping("api/driver")
+    @PostMapping("api/public/driver")
     public void addDriver(@RequestBody TourDriver tourDriver) {
         projectOneService.addDriver(tourDriver);
     }
@@ -46,15 +51,27 @@ public class ProjectOneController {
     public List<TourDto> getTourList() {
         return projectOneService.getTourList();
     }
+    @GetMapping("api/public/guidelist")
+    public List<GuideDto> getGuideList() {
+        return projectOneService.getGuideList();
+    }
 
     @DeleteMapping("api/deletetour/{id}")
     public void deleteTour(@PathVariable("id") java.lang.Integer id) {
         projectOneService.deleteTour(id);
     }
+    @DeleteMapping("api/public/deleteguide/{id}")
+    public void deleteGuide(@PathVariable("id") Integer id) {
+        projectOneService.deleteGuide(id);
+    }
 
     @PutMapping("api/edittour")
     public void editTour(@RequestBody TourDto tourDto) {
         projectOneService.editTour(tourDto);
+    }
+    @PutMapping("api/public/editguide")
+    public void editGuide(@RequestBody GuideDto guideDto) {
+        projectOneService.editGuide(guideDto);
     }
 
     @DeleteMapping("api/deletephoto/{id}")
