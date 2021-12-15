@@ -64,6 +64,19 @@ public class ProjectOneRepository {
             return result;
         }
     }
+    private class GuideDtoRowMapper implements RowMapper<GuideDto> {
+        @Override
+        public GuideDto mapRow(ResultSet resultSet, int i) throws SQLException {
+            GuideDto result = new GuideDto();
+            result.setId(resultSet.getInt("id"));
+            result.setName(resultSet.getString("name"));
+            result.setPhone(resultSet.getInt("phone"));
+            result.setEmail(resultSet.getString("email"));
+            result.setHour(resultSet.getInt("hour_rate"));
+            result.setCity_id(resultSet.getInt("city_id"));
+            return result;
+        }
+    }
 
     public void addCity(TourCity tourCity) {
         String sql = "INSERT INTO tour_city(city) VALUES (:city)";
@@ -101,9 +114,20 @@ public class ProjectOneRepository {
         Map<String, Object> paramMap = new HashMap<>();
         return jdbcTemplate.query(sql, paramMap, new TourDtoRowMapper());
     }
+    public List<GuideDto> getGuideList() {
+        String sql = "SELECT * FROM tour_guide";
+        Map<String, Object> paramMap = new HashMap<>();
+        return jdbcTemplate.query(sql, paramMap, new GuideDtoRowMapper());
+    }
 
     public void deleteTour(Integer id) {
         String sql = "DELETE FROM tour_main WHERE id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        jdbcTemplate.update(sql, paramMap);
+    }
+    public void deleteGuide(Integer id) {
+        String sql = "DELETE FROM tour_guide WHERE id = :id";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
         jdbcTemplate.update(sql, paramMap);
@@ -118,6 +142,19 @@ public class ProjectOneRepository {
         paramMap.put("newDesc_long", tour.getDesc_long());
         paramMap.put("newDuration", tour.getDuration());
         paramMap.put("newCity", tour.getCity());
+        jdbcTemplate.update(sql, paramMap);
+
+
+    }
+    public void editGuide(GuideDto guideDto) {
+        String sql = "UPDATE tour_guide SET name = :newName, phone = :newPhone, email = :newEmail, hour_rate= :newHourRate, city_id = :newCity WHERE id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", guideDto.getId());
+        paramMap.put("newName",guideDto.getName());
+        paramMap.put("newPhone", guideDto.getPhone());
+        paramMap.put("newEmail", guideDto.getEmail());
+        paramMap.put("newHourRate", guideDto.getHour());
+        paramMap.put("newCity", guideDto.getCity_id());
         jdbcTemplate.update(sql, paramMap);
 
 
@@ -150,6 +187,7 @@ public class ProjectOneRepository {
             return result;
         }
     }
+
 
     public List<TourWithPhotos> tourWithPhotos() {
         String sql = "SELECT * FROM tour_main b JOIN tour_photos c ON b.id = c.tour_id";
