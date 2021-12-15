@@ -218,5 +218,16 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="14.12.21 photo_gallery db" author="Kermo">
+        <createTable tableName="tour_gallery">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="photo_url" type="text"/>
+            <column name="tour_id" type="int">
+                <constraints foreignKeyName="fk_photo_gallery" references="tour_main(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>

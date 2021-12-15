@@ -93,6 +93,12 @@ public class ProjectOneService {
         }
 
     }
+    public List<PhotoGalleryDto> getGallery(Integer id){
+        return projectOneRepository.getGallery(id);
+    }
+    public void addGallery(PhotoGalleryDto photoGalleryDto) {
+        projectOneRepository.addGallery(photoGalleryDto);
+    }
 
 }
 

@@ -19,6 +19,10 @@ public class SecurityService extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/public/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/js").permitAll()
+                .antMatchers("/img").permitAll()
+                .antMatchers("/css").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
