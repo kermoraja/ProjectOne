@@ -132,4 +132,9 @@ public class ProjectOneController {
         return projectOneService.getAvbTemplate(id);
    }
 
+   @GetMapping("api/avbTourTemplates/{id}") // siin on päring tour ID järgi
+    public List <AvbTemplate> getTourAvbTemplates(@PathVariable("id") Integer id){
+        return projectOneService.getTourAvbTemplates(id);
+   }
+
 }

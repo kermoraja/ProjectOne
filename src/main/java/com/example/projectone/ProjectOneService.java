@@ -127,6 +127,7 @@ public class ProjectOneService {
     public AvbTemplate getAvbTemplate(Integer id){
         return projectOneRepository.getAvbTemplate(id);
     }
+    public List <AvbTemplate> getTourAvbTemplates(Integer id){return projectOneRepository.getTourAvbTemplates(id);}
 
 }
 

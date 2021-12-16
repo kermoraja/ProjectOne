@@ -320,6 +320,13 @@ public class ProjectOneRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, new AvbTemplateRowMapper());
     }
 
+    public List <AvbTemplate> getTourAvbTemplates(Integer id) {
+        String sql = "SELECT * FROM tour_avb_template WHERE tour_id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        return jdbcTemplate.query(sql,paramMap, new AvbTemplateRowMapper());
+    }
+
     private class AvbTemplateRowMapper implements RowMapper<AvbTemplate> {
         @Override
         public AvbTemplate mapRow(ResultSet resultSet, int i) throws SQLException {
