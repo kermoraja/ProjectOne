@@ -33,7 +33,7 @@ public class ProjectOneService {
         projectOneRepository.addPhoto(tourPhotos);
     }
 
-    public TourDto getTour(java.lang.Integer id) {
+    public TourDto getTour(Integer id) {
         return projectOneRepository.getTour(id);
     }
 
@@ -72,12 +72,12 @@ public class ProjectOneService {
         projectOneRepository.editGuide(guideDto);
     }
 
-    public void deletePhoto(java.lang.Integer id) {
+    public void deletePhoto(Integer id) {
         projectOneRepository.deletePhoto(id);
 
     }
 
-    public TourPhotosDto getPhotos(java.lang.Integer id){
+    public TourPhotosDto getPhotos(Integer id){
         return projectOneRepository.getPhotos(id);
     }
 
@@ -108,7 +108,7 @@ public class ProjectOneService {
         return projectOneRepository.getFullGallery();
     }
 
-    public List<PhotoGalleryDto> getGallery(java.lang.Integer id){
+    public List<PhotoGalleryDto> getGallery(Integer id){
         return projectOneRepository.getGallery(id);
     }
     public void addGallery(PhotoGalleryDto photoGalleryDto) {
