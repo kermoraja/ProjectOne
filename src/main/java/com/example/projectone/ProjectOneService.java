@@ -100,5 +100,12 @@ public class ProjectOneService {
         projectOneRepository.addGallery(photoGalleryDto);
     }
 
+    public void addAvbTemplate(AvbTemplate avbTemplate) {
+        projectOneRepository.addAvbTemplate(avbTemplate);
+    }
+    public AvbTemplate getAvbTemplate(Integer id){
+        return projectOneRepository.getAvbTemplate(id);
+    }
+
 }
 

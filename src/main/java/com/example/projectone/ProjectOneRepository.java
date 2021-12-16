@@ -132,6 +132,29 @@ public class ProjectOneRepository {
 
     }
 
+    public List<TourGuide> showGuides() {
+        String sql = "SELECT * FROM tour_guide";
+        Map<String, Object> paramMap = new HashMap<>();
+        return jdbcTemplate.query(sql,paramMap,new TourGuideRowMapper());
+    }
+
+    private class TourGuideRowMapper implements RowMapper <TourGuide>{
+        @Override
+        public TourGuide mapRow(ResultSet resultSet, int i) throws SQLException {
+            TourGuide result = new TourGuide();
+            result.setId(resultSet.getInt("id"));
+            result.setCity(resultSet.getInt("city_id"));
+            result.setName(resultSet.getString("name"));
+            result.setPhone(resultSet.getInt("phone"));
+            result.setHour_rate(resultSet.getInt("hour_rate"));
+            result.setEmail(resultSet.getString("email"));
+            return result;
+        }
+
+
+
+    }
+
     public TourPhotosDto getPhotos(Integer id) {
         String sql = "SELECT * FROM tour_photos WHERE tour_id = :id";
         Map<String, Object> paramMap = new HashMap<>();
@@ -212,5 +235,44 @@ public class ProjectOneRepository {
         paramMap.put("photo_url", photoGalleryDto.getPhoto_url());
         paramMap.put("tour_id", photoGalleryDto.getTour_id());
         jdbcTemplate.update(sql, paramMap);
+    }
+    public void addAvbTemplate(AvbTemplate avbTemplate) {
+        String sql = "INSERT INTO tour_avb_template (tour_id, start_date, end_date, day_of_week, time, max_group, " +
+                "regular_price, reduced_price) VALUES (:tourId, :startDate, :endDate, :dayOfWeek, :time, :maxGroup, " +
+                ":regularPrice, :reducedPrice)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("tourId", avbTemplate.getTourId());
+        paramMap.put("startDate", avbTemplate.getStartDate());
+        paramMap.put("endDate", avbTemplate.getEndDate());
+        paramMap.put("dayOfWeek", avbTemplate.getDayOfWeek());
+        paramMap.put("time", avbTemplate.getTime());
+        paramMap.put("maxGroup", avbTemplate.getMaxGroup());
+        paramMap.put("regularPrice", avbTemplate.getRegularPrice());
+        paramMap.put("reducedPrice", avbTemplate.getReducedPrice());
+jdbcTemplate.update(sql,paramMap);
+    }
+
+    public AvbTemplate getAvbTemplate(Integer id){
+        String sql = "SELECT * FROM tour_avb_template WHERE id= :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        return jdbcTemplate.queryForObject(sql, paramMap, new AvbTemplateRowMapper());
+    }
+
+    private class AvbTemplateRowMapper implements RowMapper<AvbTemplate>{
+        @Override
+        public AvbTemplate mapRow(ResultSet resultSet, int i) throws SQLException {
+            AvbTemplate result = new AvbTemplate();
+            result.setId(resultSet.getInt("id"));
+            result.setTourId(resultSet.getInt("tour_id"));
+            result.setStartDate(resultSet.getDate("start_date"));
+            result.setEndDate(resultSet.getDate("end_date"));
+            result.setDayOfWeek(resultSet.getInt("day_of_week"));
+            result.setTime(resultSet.getTime("time"));
+            result.setMaxGroup(resultSet.getInt("max_group"));
+            result.setRegularPrice(resultSet.getInt("regular_price"));
+            result.setReducedPrice(resultSet.getInt("reduced_price"));
+            return result;
+        }
     }
 }
