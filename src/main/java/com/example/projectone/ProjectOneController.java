@@ -122,4 +122,14 @@ public class ProjectOneController {
         projectOneService.deleteGallery(id);
     }
 
+   @PostMapping("api/avbTemplate")
+   public void addAvbTemplate(@RequestBody AvbTemplate avbTemplate){
+        projectOneService.addAvbTemplate(avbTemplate);
+   }
+
+   @GetMapping("api/avbTemplate/{id}")
+    public AvbTemplate getAvbTemplate(@PathVariable("id") Integer id){
+        return projectOneService.getAvbTemplate(id);
+   }
+
 }

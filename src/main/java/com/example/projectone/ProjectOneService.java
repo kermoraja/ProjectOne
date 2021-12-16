@@ -121,5 +121,12 @@ public class ProjectOneService {
         projectOneRepository.deleteGallery(id);
     }
 
+    public void addAvbTemplate(AvbTemplate avbTemplate) {
+        projectOneRepository.addAvbTemplate(avbTemplate);
+    }
+    public AvbTemplate getAvbTemplate(Integer id){
+        return projectOneRepository.getAvbTemplate(id);
+    }
+
 }
 
