@@ -73,7 +73,7 @@ public class ProjectOneRepository {
             result.setName(resultSet.getString("name"));
             result.setPhone(resultSet.getInt("phone"));
             result.setEmail(resultSet.getString("email"));
-            result.setHour(resultSet.getInt("hour_rate"));
+            result.setHourRate(resultSet.getInt("hour_rate"));
             result.setCity_id(resultSet.getInt("city_id"));
             return result;
         }
@@ -98,7 +98,7 @@ public class ProjectOneRepository {
     }
 
     public void addDriver(TourDriver tourDriver) {
-        String sql = "INSERT INTO tour_driver (first_name, last_name, phone, email, city, car_size) VALUES" +
+        String sql = "INSERT INTO tour_driver (first_name, last_name, phone, email, city_id, car_size) VALUES" +
                 "(:first_name, :last_name, :phone, :email, :city, :car_size)";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("first_name", tourDriver.getFirst_name());
@@ -157,7 +157,7 @@ public class ProjectOneRepository {
         paramMap.put("newName", guideDto.getName());
         paramMap.put("newPhone", guideDto.getPhone());
         paramMap.put("newEmail", guideDto.getEmail());
-        paramMap.put("newHourRate", guideDto.getHour());
+        paramMap.put("newHourRate", guideDto.getHourRate());
         paramMap.put("newCity", guideDto.getCity_id());
         jdbcTemplate.update(sql, paramMap);
 
@@ -320,6 +320,13 @@ public class ProjectOneRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, new AvbTemplateRowMapper());
     }
 
+    public List <AvbTemplate> getTourAvbTemplates(Integer id) {
+        String sql = "SELECT * FROM tour_avb_template WHERE tour_id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        return jdbcTemplate.query(sql,paramMap, new AvbTemplateRowMapper());
+    }
+
     private class AvbTemplateRowMapper implements RowMapper<AvbTemplate> {
         @Override
         public AvbTemplate mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -335,5 +342,51 @@ public class ProjectOneRepository {
             result.setReducedPrice(resultSet.getInt("reduced_price"));
             return result;
         }
+    }
+    public GuideDto getGuide(Integer id) {
+        String sql = "SELECT * FROM tour_guide WHERE id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        return jdbcTemplate.queryForObject(sql, paramMap, new GuideDtoRowMapper());
+    }
+    public DriverDto getDriver(Integer id) {
+        String sql = "SELECT * FROM tour_driver WHERE id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", id);
+        return jdbcTemplate.queryForObject(sql, paramMap, new DriverDtoRowMapper());
+    }
+
+    public List<DriverDto> getDriverList(){
+        String sql = "SELECT * FROM tour_driver";
+        Map<String, Object> paramMap = new HashMap<>();
+        return jdbcTemplate.query(sql, paramMap, new DriverDtoRowMapper());
+    }
+    private class DriverDtoRowMapper implements RowMapper<DriverDto> {
+        @Override
+        public DriverDto mapRow(ResultSet resultSet, int i) throws SQLException {
+            DriverDto result = new DriverDto();
+            result.setId(resultSet.getInt("id"));
+            result.setFirstName(resultSet.getString("first_name"));
+            result.setLastName(resultSet.getString("last_name"));
+            result.setPhone(resultSet.getString("phone"));
+            result.setEmail(resultSet.getString("email"));
+            result.setCity_id(resultSet.getInt("city_id"));
+            result.setCar_size(resultSet.getInt("car_size"));
+            return result;
+        }
+    }
+    public void editDriver(DriverDto driverDto) {
+        String sql = "UPDATE tour_driver SET first_name = :newName, last_name = :newLastName, phone = :newPhone, email = :newEmail, car_size= :newCarSize, city_id = :newCity WHERE id = :id";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", driverDto.getId());
+        paramMap.put("newName", driverDto.getFirstName());
+        paramMap.put("newLastName", driverDto.getLastName());
+        paramMap.put("newPhone", driverDto.getPhone());
+        paramMap.put("newEmail", driverDto.getEmail());
+        paramMap.put("newCarSize", driverDto.getCar_size());
+        paramMap.put("newCity", driverDto.getCity_id());
+        jdbcTemplate.update(sql, paramMap);
+
+
     }
 }
