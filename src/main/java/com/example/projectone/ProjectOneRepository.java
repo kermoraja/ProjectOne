@@ -325,7 +325,14 @@ public class ProjectOneRepository {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
         return jdbcTemplate.query(sql,paramMap, new AvbTemplateRowMapper());
+
+    }public List <AvbTemplate> getAllTourAvbTemplates() {
+        String sql = "SELECT * FROM tour_avb_template";
+        Map<String, Object> paramMap = new HashMap<>();
+        return jdbcTemplate.query(sql,paramMap, new AvbTemplateRowMapper());
     }
+
+
 
     private class AvbTemplateRowMapper implements RowMapper<AvbTemplate> {
         @Override

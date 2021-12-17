@@ -149,6 +149,10 @@ public class ProjectOneController {
     public List <AvbTemplate> getTourAvbTemplates(@PathVariable("id") Integer id){
         return projectOneService.getTourAvbTemplates(id);
    }
+   @PostMapping("api/genAvailabilities") //genereerib avb template järgi kõikidele tuuridele kõik avb
+    public void genAvailabilities(){
+        projectOneService.genAvailabilities();
+   }
 
    @GetMapping("api/guide/{id}")
    public GuideDto getGuide(@PathVariable("id") java.lang.Integer id) {

@@ -133,6 +133,13 @@ public class ProjectOneService {
         return projectOneRepository.getAvbTemplate(id);
     }
     public List <AvbTemplate> getTourAvbTemplates(Integer id){return projectOneRepository.getTourAvbTemplates(id);}
+    public List <AvbTemplate> getAllTourAvbTemplates(){return projectOneRepository.getAllTourAvbTemplates();}
+
+    public void genAvailabilities(){
+        List <AvbTemplate> avbTemplates = projectOneRepository.getAllTourAvbTemplates();
+
+
+    }
 
     public GuideDto getGuide(@PathVariable("id") java.lang.Integer id) {
         return projectOneRepository.getGuide(id);
