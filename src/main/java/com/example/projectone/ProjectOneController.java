@@ -42,9 +42,22 @@ public class ProjectOneController {
         projectOneService.addGuide(tourGuide);
     }
 
-    @PostMapping("api/public/driver")
+    @PostMapping("api/driver")
     public void addDriver(@RequestBody TourDriver tourDriver) {
         projectOneService.addDriver(tourDriver);
+    }
+    @GetMapping("api/driver/{id}")
+    public DriverDto getDriver(@PathVariable("id") java.lang.Integer id) {
+        return projectOneService.getDriver(id);
+
+    }
+    @GetMapping("api/driverlist")
+    public List<DriverDto> getDriverList(){
+        return projectOneService.getDriverList();
+    }
+    @PutMapping("api/editdriver")
+    public void editDriver(@RequestBody DriverDto driverDto) {
+        projectOneService.editDriver(driverDto);
     }
 
     @GetMapping("api/public/tourlist")
@@ -137,4 +150,9 @@ public class ProjectOneController {
         return projectOneService.getTourAvbTemplates(id);
    }
 
+   @GetMapping("api/guide/{id}")
+   public GuideDto getGuide(@PathVariable("id") java.lang.Integer id) {
+       return projectOneService.getGuide(id);
+
+   }
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -47,6 +48,10 @@ public class ProjectOneService {
 
     public void addDriver(TourDriver tourDriver) {
         projectOneRepository.addDriver(tourDriver);
+    }
+
+    public DriverDto getDriver(Integer id){
+        return projectOneRepository.getDriver(id);
     }
 
     public List<TourDto> getTourList() {
@@ -128,6 +133,19 @@ public class ProjectOneService {
         return projectOneRepository.getAvbTemplate(id);
     }
     public List <AvbTemplate> getTourAvbTemplates(Integer id){return projectOneRepository.getTourAvbTemplates(id);}
+
+    public GuideDto getGuide(@PathVariable("id") java.lang.Integer id) {
+        return projectOneRepository.getGuide(id);
+
+    }
+
+    public List<DriverDto> getDriverList(){
+        return projectOneRepository.getDriverList();
+    }
+
+    public void editDriver(DriverDto driverDto) {
+        projectOneRepository.editDriver(driverDto);
+    }
 
 }
 

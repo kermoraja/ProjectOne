@@ -5,7 +5,8 @@ public class GuideDto {
     private String name;
     private int phone;
     private String email;
-    private int hour;
+    private int hourRate;
+
     private int city_id;
 
     public int getId() {
@@ -40,12 +41,12 @@ public class GuideDto {
         this.email = email;
     }
 
-    public int getHour() {
-        return hour;
+    public int getHourRate() {
+        return hourRate;
     }
 
-    public void setHour(int hour) {
-        this.hour = hour;
+    public void setHourRate(int hour) {
+        this.hourRate = hour;
     }
 
     public int getCity_id() {
